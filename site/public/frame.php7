@@ -1,0 +1,4 @@
+<?php
+
+// used by php-fpm 7.4
+require_once __DIR__ . '/../example.php';

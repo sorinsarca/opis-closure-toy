@@ -1,0 +1,60 @@
+version: "3.8"
+x-default-php-options:
+  &default-php-fpm-options
+  user: www-data
+  working_dir: /code/site/public
+  volumes:
+    - ./:/code
+    - ./php.ini:/usr/local/etc/php/conf.d/my.ini
+    - ./fpm.conf:/usr/local/etc/php-fpm.d/my.conf
+x-default-php-apache-options:
+  &default-php-apache-options
+  user: www-data
+  working_dir: /code/site/public
+  volumes:
+    - ./:/code
+    - ./php.ini:/usr/local/etc/php/conf.d/my.ini
+    - ./apache.conf:/etc/apache2/sites-available/000-default.conf
+services:
+  nginx:
+    image: nginx:latest
+    ports:
+      - "8585:80"
+    volumes:
+      - ./:/code
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    links:
+      - php7
+      - php8
+  apache7:
+    << : *default-php-apache-options
+    build:
+      context: .
+      dockerfile: ./apache.dockerfile
+      args:
+        - IMAGE=php:7.4-apache
+    ports:
+      - "8587:8586"
+  apache8:
+    << : *default-php-apache-options
+    build:
+      context: .
+      dockerfile: ./apache.dockerfile
+      args:
+        - IMAGE=php:rc-apache
+    ports:
+      - "8588:8586"
+  php7:
+    << : *default-php-fpm-options
+    build:
+      context: .
+      dockerfile: ./php.dockerfile
+      args:
+        - IMAGE=php:7.4-fpm-alpine
+  php8:
+    << : *default-php-fpm-options
+    build:
+      context: .
+      dockerfile: ./php.dockerfile
+      args:
+        - IMAGE=php:rc-fpm-alpine

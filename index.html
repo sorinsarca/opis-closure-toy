@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            display: flex;
+            flex-direction: row;
+            height: 50vh;
+            width: 100vw;
+        }
+
+        iframe {
+            flex: 0.5;
+            height: 100%;
+            border: none;
+            outline: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <iframe src="http://localhost:8585/frame.php7"></iframe>
+    <iframe src="http://localhost:8585/frame.php8"></iframe>
+</div>
+<div>
+    <iframe src="http://localhost:8587/frame.php"></iframe>
+    <iframe src="http://localhost:8588/frame.php"></iframe>
+</div>
+</body>
+</html>
