@@ -1,4 +1,4 @@
-ARG IMAGE=php:rc-fpm-alipine
+ARG IMAGE=php:rc-fpm-alpine
 FROM $IMAGE
 
 RUN apk add --no-cache --virtual .persistent-deps libffi-dev \
