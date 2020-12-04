@@ -57,4 +57,4 @@ services:
       context: .
       dockerfile: ./php.dockerfile
       args:
-        - IMAGE=php:rc-fpm-alpine
+        - IMAGE=php:8.0-fpm-alpine
